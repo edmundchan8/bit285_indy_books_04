@@ -4,6 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using IndyBooks.Models;
+using IndyBooks.ViewModels;
+using IndyBooks.Migrations;
 
 namespace IndyBooks.Controllers
 {
@@ -11,6 +15,13 @@ namespace IndyBooks.Controllers
     [ApiController]
     public class WriterController : ControllerBase
     {
+        private IndyBooksDataContext _dbc;
+        public WriterController (IndyBooksDataContext indyBooksdb) 
+        {
+            _dbc = indyBooksdb;
+        }
+
+
         // GET: api/Writer
         [HttpGet]
         public IEnumerable<string> Get()
