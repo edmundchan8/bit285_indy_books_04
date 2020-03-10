@@ -24,14 +24,14 @@ namespace IndyBooks.Controllers
 
         // GET: api/Writer
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get()
         {
             return new string[] { "value1", "value2" };
         }
 
         // GET: api/Writer/5
         [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        public IActionResult Get(int id)
         {
             return "value";
         }
