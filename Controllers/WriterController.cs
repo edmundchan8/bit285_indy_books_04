@@ -34,8 +34,10 @@ namespace IndyBooks.Controllers
         [HttpGet("{id}", Name = "Get")]
         public IActionResult Get(long id)
         {
-            var writer = _dbc.Writers.SingleOrDefault(w => w.Id == id);
-            return Ok(new { id = id, name = writer.Name });
+            var writers = _dbc.Writers;
+            if (writers.Any(w => w.Id == id))
+                return Ok(writers.Select(w => new { id = w.Id, name = w.Name }).Where(w => w.id == id));
+            return NotFound(id);
         }
 
         // POST: api/Writer
