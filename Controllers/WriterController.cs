@@ -26,14 +26,16 @@ namespace IndyBooks.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            var writers = _dbc.Writers;
+            return Ok(writers.Select(w => new { id = w.Id, name = w.Name, books = ""}));
         }
 
         // GET: api/Writer/5
         [HttpGet("{id}", Name = "Get")]
         public IActionResult Get(long id)
         {
-            return "value";
+            var writer = _dbc.Writers.SingleOrDefault(w => w.Id == id);
+            return Ok(new { id = id, name = writer.Name });
         }
 
         // POST: api/Writer
